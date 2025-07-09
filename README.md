@@ -1,6 +1,6 @@
 # http-health-probe
 
-[![CI](https://github.com/your-org/http-health-probe/actions/workflows/coveralls.yaml/badge.svg)](https://github.com/your-org/http-health-probe/actions)
+[![CI](https://github.com/dev-shimada/http-health-probe/actions/workflows/CI.yaml/badge.svg)](https://github.com/dev-shimada/http-health-probe/actions/workflows/CI.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/your-org/http-health-probe/badge.svg?branch=main)](https://coveralls.io/github/your-org/http-health-probe?branch=main)
 
 http-health-probeは、HTTPベースのAPIのヘルスチェックを行うためのシンプルなコマンドラインツールです。
