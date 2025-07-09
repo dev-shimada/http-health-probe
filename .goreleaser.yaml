@@ -43,13 +43,13 @@ changelog:
   sort: asc
   filters:
     exclude:
-      - "^docs:"
-      - "^test:"
+      - "^docs"
+      - "^test"
       - "^fmt"
-      - "^actions:"
-      - "^refactor:"
-      - "^Merge"
-      - "^chore:"
+      - "^actions"
+      - "^refactor"
+      - "^merge"
+      - "^chore"
 
 release:
   footer: >-
