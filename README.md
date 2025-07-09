@@ -50,7 +50,7 @@ http-health-probe --addr=http://localhost:8080/healthcheck
 ```Dockerfile
 FROM gcr.io/distroless/base-debian12:latest
 COPY --chown=nonroot:nonroot --from=build http-health-probe /bin/http-health-probe
-HEALTHCHECK --interval=10s --timeout=3s --start-period=5s CMD ["/bin/http-health-probe", "--addr=http://localhost:3000"]
+HEALTHCHECK --interval=10s --timeout=3s --start-period=5s CMD ["/bin/http-health-probe", "--addr=:3000"]
 ```
 
 ## 📝 ライセンス
