@@ -1,0 +1,36 @@
+name: coveralls
+
+on:
+  push:
+    branches: [ "*" ]
+  workflow_dispatch:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Go
+        id: setup-go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: ./go.mod
+
+      - name: Download Go modules
+        shell: bash
+        if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
+        run: go mod download
+      
+      - name: Run Unit tests with coverage
+        run: |
+          go test -race -covermode atomic -coverprofile=covprofile ./internal/...
+
+      - name: Install goveralls
+        run: go install github.com/mattn/goveralls@latest
+
+      - name: Send coverage
+        env:
+          COVERALLS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: goveralls -coverprofile=covprofile -service=github
