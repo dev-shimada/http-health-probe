@@ -1,0 +1,23 @@
+{
+    "name": "http-health-probe",
+    "build": {
+        "context": ".",
+        "dockerfile": "Dockerfile",
+        "target": "vscode"
+    },
+    "workspaceFolder": "/workspace",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.Go",
+                "GitHub.copilot",
+                "RooVeterinaryInc.roo-cline"
+            ]
+        }
+    },
+    "mounts": [
+        "source=${localWorkspaceFolder}/,target=/workspace,type=bind"
+    ],
+    "remoteUser": "root",
+    "postCreateCommand": "/bin/sh .devcontainer/post_create.sh"
+}
