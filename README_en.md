@@ -18,6 +18,13 @@ http-health-probe is a simple command-line tool for health checking HTTP-based A
 ### Download Binary
 
 Download the binary for your platform from the releases page.
+```shell
+INSTALL_DIR=/tmp
+VERSION=v0.1.1
+TARGETOS=Linux
+TARGETARCH=arm64
+curl --silent --location https://github.com/dev-shimada/http-health-probe/releases/download/${VERSION}/http-health-probe_${TARGETOS}_${TARGETARCH}.tar.gz | tar xvz -C ${INSTALL_DIR} --one-top-level=http-health-probe_${TARGETOS}_${TARGETARCH}
+```
 
 ### go install
 
@@ -48,9 +55,21 @@ http-health-probe --addr=http://localhost:8080/healthcheck
 ## 🐳 Example with distroless image
 
 ```Dockerfile
+FROM rust:bookworm AS build
+ARG TARGETOS
+ARG TARGETARCH
+RUN <<EOF
+INSTALL_DIR=/tmp
+VERSION=v0.1.0
+curl --silent --location https://github.com/dev-shimada/http-health-probe/releases/download/${VERSION}/http-health-probe_${TARGETOS}_${TARGETARCH}.tar.gz | tar xvz -C ${INSTALL_DIR} --one-top-level=http-health-probe_${TARGETOS}_${TARGETARCH}
+EOF
+
 FROM gcr.io/distroless/base-debian12:latest
-COPY --chown=nonroot:nonroot --from=build http-health-probe /bin/http-health-probe
+ARG TARGETOS
+ARG TARGETARCH
+COPY --chown=nonroot:nonroot --from=build /tmp/http-health-probe_${TARGETOS}_${TARGETARCH}/http-health-probe /bin/http-health-probe
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s CMD ["/bin/http-health-probe", "--addr=:3000"]
+USER nonroot:nonroot
 ```
 
 ## 📝 License
