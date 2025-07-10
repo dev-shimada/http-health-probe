@@ -60,7 +60,7 @@ ARG TARGETOS
 ARG TARGETARCH
 RUN <<EOF
 INSTALL_DIR=/tmp
-VERSION=v0.1.0
+VERSION=v0.1.1
 curl --silent --location https://github.com/dev-shimada/http-health-probe/releases/download/${VERSION}/http-health-probe_${TARGETOS}_${TARGETARCH}.tar.gz | tar xvz -C ${INSTALL_DIR} --one-top-level=http-health-probe_${TARGETOS}_${TARGETARCH}
 EOF
 
