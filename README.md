@@ -1,23 +1,32 @@
 # http-health-probe
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/dev-shimada/http-health-probe)](https://goreportcard.com/report/github.com/dev-shimada/http-health-probe)
-[![CI](https://github.com/dev-shimada/http-health-probe/actions/workflows/CI.yaml/badge.svg)](https://github.com/dev-shimada/http-health-probe/actions/workflows/CI.yaml)
-[![Coverage Status](https://coveralls.io/repos/github/dev-shimada/http-health-probe/badge.svg?branch=main)](https://coveralls.io/github/dev-shimada/http-health-probe?branch=main)
-[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/dev-shimada/http-health-probe/blob/master/LICENSE)
+<p align="center">
+  <a href="https://github.com/dev-shimada/http-health-probe/actions/workflows/CI.yaml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/dev-shimada/http-health-probe/CI.yaml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI"></a>
+  <a href="https://coveralls.io/github/dev-shimada/http-health-probe?branch=main"><img alt="Coverage" src="https://img.shields.io/coveralls/github/dev-shimada/http-health-probe/main?style=flat-square&logo=coveralls&logoColor=white"></a>
+  <a href="https://github.com/dev-shimada/http-health-probe/blob/main/go.mod"><img alt="Go Version" src="https://img.shields.io/github/go-mod/go-version/dev-shimada/http-health-probe?style=flat-square&logo=go&logoColor=white"></a>
+  <a href="https://github.com/dev-shimada/http-health-probe/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/github/license/dev-shimada/http-health-probe?style=flat-square"></a>
+</p>
 
-http-health-probeは、HTTPベースのAPIのヘルスチェックを行うためのシンプルなコマンドラインツールです。
+<p align="center">
+  <a href="https://github.com/dev-shimada/http-health-probe/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/dev-shimada/http-health-probe?style=flat-square&logo=github&logoColor=white"></a>
+  <a href="#-installation"><img alt="go install" src="https://img.shields.io/badge/go%20install-dev--shimada%2Fhttp--health--probe-00ADD8?style=flat-square&logo=go&logoColor=white"></a>
+</p>
 
-## ✨ 特徴
+http-health-probe is a simple command-line tool for health checking HTTP-based APIs. 
 
-- C言語のライブラリ不要（Goのみで実装）
-- distrolessイメージで動作可能
-- シンプルなコマンドラインインターフェース
+*(日本語版は[こちら](./README.ja.md))*
 
-## 📦 インストール
+## ✨ Features
 
-### バイナリダウンロード
+- No C language libraries required (implemented in Go only)
+- Works with distroless images
+- Simple command-line interface
 
-リリースページから各プラットフォーム向けのバイナリをダウンロードしてください。
+## 📦 Installation
+
+### Download Binary
+
+Download the binary for your platform from the releases page.
 ```shell
 INSTALL_DIR=/tmp
 VERSION=v0.1.1
@@ -32,27 +41,27 @@ curl --silent --location https://github.com/dev-shimada/http-health-probe/releas
 go install github.com/dev-shimada/http-health-probe
 ```
 
-## 🚀 使い方
+## 🚀 Usage
 
-### コマンド例
+### Command Example
 
 ```shell
 http-health-probe --addr=http://localhost:8080/healthcheck
 ```
 
-### ⚙️ 主要オプション
+### ⚙️ Main Options
 
-| オプション          | 説明                                | デフォルト値        |
-| ------------------- | ----------------------------------- | ------------------- |
-| `--addr`            | チェック対象のHTTPエンドポイントURL | なし（必須）        |
-| `--method`          | HTTPメソッド                        | `GET`               |
-| `--timeout`         | リクエストのタイムアウト            | `1s`                |
-| `--expected-status` | 正常と判断するHTTPステータスコード  | `200`               |
-| `--tls`             | TLSを使用する                       | `false`             |
-| `--insecure`        | TLS証明書の検証をスキップする       | `false`             |
-| `--user-agent`      | User-Agentヘッダー                  | `http-health-probe` |
+| Option              | Description                                             | Default Value       |
+| ------------------- | ------------------------------------------------------- | ------------------- |
+| `--addr`            | HTTP endpoint URL to check                              | None (required)     |
+| `--method`          | HTTP method                                             | `GET`               |
+| `--timeout`         | Request timeout                                         | `1s`                |
+| `--expected-status` | Expected HTTP status code for a successful health check | `200`               |
+| `--tls`             | Use TLS                                                 | `false`             |
+| `--insecure`        | Skip TLS certificate verification                       | `false`             |
+| `--user-agent`      | User-Agent header                                       | `http-health-probe` |
 
-## 🐳 distrolessイメージでの利用例
+## 🐳 Example with distroless image
 
 ```Dockerfile
 FROM rust:bookworm AS build
@@ -72,10 +81,10 @@ HEALTHCHECK --interval=10s --timeout=3s --start-period=5s CMD ["/bin/http-health
 USER nonroot:nonroot
 ```
 
-## 📝 ライセンス
+## 📝 License
 
-本プロジェクトはMITライセンスの下で公開されています。
+This project is licensed under the MIT License.
 
-## 🤝 貢献
+## 🤝 Contribution
 
-IssueやPull Requestは歓迎します。バグ報告や機能提案もお気軽にどうぞ。
+Issues and Pull Requests are welcome. Feel free to report bugs or suggest features.
