@@ -39,18 +39,11 @@ jobs:
         if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
       
-      - name: Install golangci-lint
+      # The action detects .custom-gcl.yml and builds a custom binary with the nilaway plugin
+      - name: golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
           version: v2.14.0
-          install-only: true
-
-      # nilaway is not bundled in golangci-lint, so build a custom binary (see .custom-gcl.yml)
-      - name: Build custom golangci-lint with nilaway
-        run: golangci-lint custom
-
-      - name: golangci-lint
-        run: ./custom-gcl run ./...
 
   vet:
     needs: setup
