@@ -9,7 +9,6 @@
 
 <p align="center">
   <a href="https://github.com/dev-shimada/http-health-probe/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/dev-shimada/http-health-probe?style=flat-square&logo=github&logoColor=white"></a>
-  <a href="https://goreportcard.com/report/github.com/dev-shimada/http-health-probe"><img alt="Go Report Card" src="https://goreportcard.com/badge/github.com/dev-shimada/http-health-probe?style=flat-square"></a>
   <a href="#-インストール"><img alt="go install" src="https://img.shields.io/badge/go%20install-dev--shimada%2Fhttp--health--probe-00ADD8?style=flat-square&logo=go&logoColor=white"></a>
 </p>
 
