@@ -22,14 +22,12 @@ jobs:
           path: .
 
   lint:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Download repo
-        uses: actions/download-artifact@v4
-        with:
-          name: repo
-      
+      # Checkout directly: upload-artifact skips hidden files (.golangci.yml, .custom-gcl.yml)
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Set up Go
         id: setup-go
         uses: actions/setup-go@v5
