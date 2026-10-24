@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"flag"
 	"fmt"
@@ -12,7 +13,7 @@ import (
 
 const (
 	// ExitOK for exit code
-	ExitOK int = 0
+	ExitOK = 0
 	// ExitInvalidArgs for exit code
 	ExitInvalidArgs = 1
 	// ExitConnectionFailed for exit code
@@ -63,7 +64,7 @@ func run(cfg config) int {
 
 	url := parseAddr(cfg.addr, cfg.useTLS)
 
-	req, err := http.NewRequest(cfg.method, url, nil)
+	req, err := http.NewRequestWithContext(context.Background(), cfg.method, url, nil)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, "Error creating request:", err)
 		return ExitConnectionFailed
@@ -103,10 +104,9 @@ func newClient(insecure bool, timeout time.Duration) *http.Client {
 	}
 }
 
-
 func parseAddr(addr string, useTLS bool) string {
-	if strings.HasPrefix(addr, ":") {
-		addr = "localhost" + addr
+	if rest, ok := strings.CutPrefix(addr, ":"); ok {
+		addr = "localhost:" + rest
 	}
 	if !strings.HasPrefix(addr, "http://") && !strings.HasPrefix(addr, "https://") {
 		if useTLS {

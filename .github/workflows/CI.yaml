@@ -25,14 +25,12 @@ jobs:
           path: .
 
   lint:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
-      - name: Download repo
-        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
-        with:
-          name: repo
-      
+      # Checkout directly: upload-artifact skips hidden files (.golangci.yml, .custom-gcl.yml)
+      - name: Checkout code
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+
       - name: Set up Go
         id: setup-go
         uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5.6.0
@@ -44,10 +42,11 @@ jobs:
         if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
       
+      # The action detects .custom-gcl.yml and builds a custom binary with the nilaway plugin
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@9fae48acfc02a90574d7c304a1758ef9895495fa # v7.0.1
+        uses: golangci/golangci-lint-action@ba0d7d2ec06a0ea1cb5fa41b2e4a3ab91d21278a # v9.3.0
         with:
-          version: v2.0
+          version: v2.14.0
 
   vet:
     needs: setup
@@ -66,7 +65,7 @@ jobs:
       
       - name: Download Go modules
         shell: bash
-        if: ${{ steps.setup.outputs.cache-hit != 'true' }}
+        if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
 
       - name: Go Vet
@@ -89,7 +88,7 @@ jobs:
 
       - name: Download Go modules
         shell: bash
-        if: ${{ steps.setup.outputs.cache-hit != 'true' }}
+        if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
 
       - name: Build
@@ -112,7 +111,7 @@ jobs:
       
       - name: Download Go modules
         shell: bash
-        if: ${{ steps.setup.outputs.cache-hit != 'true' }}
+        if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
       
       - name: Test

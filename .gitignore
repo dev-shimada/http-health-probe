@@ -1,2 +1,5 @@
 http-health-probe
 dist
+
+# golangci-lint custom build (nilaway)
+/custom-gcl

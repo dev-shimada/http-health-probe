@@ -1,10 +1,10 @@
-FROM --platform=$BUILDPLATFORM golang:1.24.3-bookworm as vscode
+FROM --platform=$BUILDPLATFORM golang:1.27.3-bookworm AS vscode
 
 ARG TARGETPLATFORM
 ARG BUILDPLATFORM
 ARG TARGETOS
 ARG TARGETARCH
-ENV LESSCHARSET utf-8
+ENV LESSCHARSET=utf-8
 
 WORKDIR /workspace
 
