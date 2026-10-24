@@ -63,7 +63,7 @@ jobs:
       
       - name: Download Go modules
         shell: bash
-        if: ${{ steps.setup.outputs.cache-hit != 'true' }}
+        if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
 
       - name: Go Vet
@@ -86,7 +86,7 @@ jobs:
 
       - name: Download Go modules
         shell: bash
-        if: ${{ steps.setup.outputs.cache-hit != 'true' }}
+        if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
 
       - name: Build
@@ -109,7 +109,7 @@ jobs:
       
       - name: Download Go modules
         shell: bash
-        if: ${{ steps.setup.outputs.cache-hit != 'true' }}
+        if: ${{ steps.setup-go.outputs.cache-hit != 'true' }}
         run: go mod download
       
       - name: Test
